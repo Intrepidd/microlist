@@ -15,6 +15,10 @@
 #ifndef      __MICROLIST__
 # define     __MICROLIST__
 
+/**
+ * \file microlist.h
+ */
+
 typedef struct       s_microitem
 {
   struct s_microitem *next;
@@ -28,5 +32,12 @@ typedef struct
   microitem    *head;
   microitem    *tail;
 }              microlist;
+
+/**
+ * \brief Inits a micro list
+ * \return Pointer to the microlist
+ */
+
+microlist   *microlist_init(void);
 
 #endif      /* __MICROLIST__ */

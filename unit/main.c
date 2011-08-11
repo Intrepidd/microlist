@@ -14,10 +14,26 @@
 
 #include    <stdio.h>
 #include    <stdlib.h>
+#include    <assert.h>
 
-int         main()
+#include    "microlist.h"
+
+void        test_init(void)
+{
+  microlist *list;
+
+  puts("Running init test...");
+  list = microlist_init();
+  assert(list != NULL);
+  assert(list->size == 0);
+  assert(list->head == NULL);
+  assert(list->tail == NULL);
+}
+
+int         main(void)
 {
   puts("Running unit tests...");
+  test_init();
   puts("All unit tests passed, great!");
   return (EXIT_SUCCESS);
 }
