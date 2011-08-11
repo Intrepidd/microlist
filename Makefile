@@ -18,9 +18,12 @@ CC        =   gcc
 RM        =   rm -f
 AR        =   ar r
 RANLIB    =   ranlib
-SRCS      =   $(shell find -name "*.c")
+SRCS      =   $(shell find src -name "*.c")
 OBJS      =   $(SRCS:.c=.o)
+SRCS_UNIT =   $(shell find unit -name "*.c")
+OBJS_UNIT =   $(SRCS_UNIT:.c=.o)
 INCLUDES  =   includes/
+UNIT_NAME =   unit_tests
 
 $(NAME)   :   $(OBJS)
 	$(AR) $(NAME) $(OBJS)
@@ -29,7 +32,7 @@ $(NAME)   :   $(OBJS)
 all       :   $(NAME)
 
 clean     :
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) $(OBJS_UNIT)
 
 fclean    :   clean
 	$(RM) $(NAME)
@@ -40,3 +43,9 @@ target debug:
 CFLAGS  =    -W -Wall -g3
 
 debug     :   re
+
+unit      :   re $(OBJS_UNIT)
+	$(CC) -o $(UNIT_NAME) $(OBJS) $(OBJS_UNIT)
+	./$(UNIT_NAME)
+
+.PHONY    : unit debug re fclean clean all
