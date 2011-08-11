@@ -12,31 +12,31 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-NAME			=		microlist.a
-CFLAGS		=		-W -Wall -O3
-CC 				=		gcc
-RM 				=		rm -f
-AR				=		ar r
-RANLIB		=		ranlib
-SRCS			=		$(shell find -name "*.c")
-OBJS			=		$(SRCS:.c=.o)
-INCLUDES	=		includes/
+NAME      =   microlist.a
+CFLAGS    =   -W -Wall -O3
+CC        =   gcc
+RM        =   rm -f
+AR        =   ar r
+RANLIB    =   ranlib
+SRCS      =   $(shell find -name "*.c")
+OBJS      =   $(SRCS:.c=.o)
+INCLUDES  =   includes/
 
-$(NAME)		:		$(OBJS)
+$(NAME)   :   $(OBJS)
 	$(AR) $(NAME) $(OBJS)
 	$(RANLIB) $(NAME)
 
-all				: 	$(NAME)
+all       :   $(NAME)
 
-clean			:
+clean     :
 	$(RM) $(OBJS)
 
-fclean		:		clean
+fclean    :   clean
 	$(RM) $(NAME)
 
-re				:		fclean all
+re        :   fclean all
 
 target debug:
 CFLAGS  =    -W -Wall -g3
 
-debug			:		re
+debug     :   re
