@@ -24,16 +24,29 @@ void        test_init(void)
 
   puts("Running init test...");
   list = microlist_init();
-  assert(list != NULL);
-  assert(list->size == 0);
-  assert(list->head == NULL);
-  assert(list->tail == NULL);
+  assert(list != NULL && list->size == 0);
+  assert(list->head == NULL && list->tail == NULL);
+}
+
+void        test_insert(void)
+{
+  microlist *list;
+  microitem *item;
+  microitem *item2;
+
+  puts("Running insert test");
+  list = microlist_init();
+  item = microlist_insert_tail(list, NULL);
+  assert(item->prev == NULL && item->next == NULL && list->size == 1);
+  item2 = microlist_insert_tail(list, NULL);
+  assert(item2->prev == item && item2->next == NULL && list->size == 2);
 }
 
 int         main(void)
 {
   puts("Running unit tests...");
   test_init();
+  test_insert();
   puts("All unit tests passed, great!");
   return (EXIT_SUCCESS);
 }
