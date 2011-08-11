@@ -13,7 +13,8 @@
 #   limitations under the License.
 
 NAME      =   microlist.a
-CFLAGS    =   -W -Wall -O3
+INCLUDES  =   include/
+CFLAGS    =   -W -Wall -O3 -I $(INCLUDES)
 CC        =   gcc
 RM        =   rm -f
 AR        =   ar r
@@ -22,8 +23,9 @@ SRCS      =   $(shell find src -name "*.c")
 OBJS      =   $(SRCS:.c=.o)
 SRCS_UNIT =   $(shell find unit -name "*.c")
 OBJS_UNIT =   $(SRCS_UNIT:.c=.o)
-INCLUDES  =   includes/
 UNIT_NAME =   unit_tests
+
+target debug:CFLAGS  =    -W -Wall -g3 -I $(INCLUDES)
 
 $(NAME)   :   $(OBJS)
 	$(AR) $(NAME) $(OBJS)
@@ -38,9 +40,6 @@ fclean    :   clean
 	$(RM) $(NAME)
 
 re        :   fclean all
-
-target debug:
-CFLAGS  =    -W -Wall -g3
 
 debug     :   re
 

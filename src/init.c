@@ -12,12 +12,18 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-#include    <stdio.h>
 #include    <stdlib.h>
+#include    "microlist.h"
 
-int         main()
+microlist   *microlist_init(void)
 {
-  puts("Running unit tests...");
-  puts("All unit tests passed, great!");
-  return (EXIT_SUCCESS);
+  microlist *list;
+
+  list = malloc(sizeof(*list));
+  if (!list)
+    return (NULL);
+  list->size = 0;
+  list->head = NULL;
+  list->tail = NULL;
+  return (list);
 }
