@@ -38,7 +38,7 @@ clean     :
 	$(RM) $(OBJS) $(OBJS_UNIT)
 
 fclean    :   clean
-	$(RM) $(NAME)
+	$(RM) $(NAME) $(UNIT_NAME)
 
 re        :   fclean all
 
