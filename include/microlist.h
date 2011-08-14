@@ -59,4 +59,24 @@ microitem   *microlist_insert_after(microlist *list, microitem *item, void *data
 
 microitem   *microlist_append(microlist *list, void *data);
 
+
+/**
+ * \brief Inserts an element before a given element
+ * \param list Pointer to the list
+ * \param item Item before which insert the element
+ * \param data Pointer on the data to be stored in the list
+ * \return Pointer to the newly created microitem
+ */
+
+microitem   *microlist_insert_before(microlist *list, microitem *item, void *data);
+
+/**
+ * \brief Inserts an element at the beginning of the list
+ * \param list Pointer to the list
+ * \param data Pointer on the data to be stored in the list
+ * \return Pointer to the newly created microitem
+ */
+
+microitem   *microlist_prepend(microlist *list, void *data);
+
 #endif      /* __MICROLIST__ */

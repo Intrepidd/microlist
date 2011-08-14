@@ -26,6 +26,7 @@ OBJS_UNIT =   $(SRCS_UNIT:.c=.o)
 UNIT_NAME =   unit_tests
 
 target debug:CFLAGS  =    -W -Wall -g3 -I $(INCLUDES)
+target unit :CFLAGS  =    -W -Wall -g3 -I $(INCLUDES)
 
 $(NAME)   :   $(OBJS)
 	$(AR) $(NAME) $(OBJS)
