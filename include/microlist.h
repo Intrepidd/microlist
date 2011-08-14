@@ -41,12 +41,22 @@ typedef struct
 microlist   *microlist_init(void);
 
 /**
+ * \brief Inserts an element after a given element
+ * \param list Pointer to the list
+ * \param item Item after which insert the element
+ * \param data Pointer on the data to be stored in the list
+ * \return Pointer to the newly created microitem
+ */
+
+microitem   *microlist_insert_after(microlist *list, microitem *item, void *data);
+
+/**
  * \brief Inserts an element at the end of the list
  * \param list Pointer to the list
  * \param data Pointer on the data to be stored in the list
  * \return Pointer to the newly created microitem
  */
 
-microitem   *microlist_insert_tail(microlist *list, void *data);
+microitem   *microlist_append(microlist *list, void *data);
 
 #endif      /* __MICROLIST__ */

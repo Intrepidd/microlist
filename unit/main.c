@@ -36,9 +36,9 @@ void        test_insert(void)
 
   puts("Running insert test");
   list = microlist_init();
-  item = microlist_insert_tail(list, NULL);
+  item = microlist_append(list, NULL);
   assert(item->prev == NULL && item->next == NULL && list->size == 1);
-  item2 = microlist_insert_tail(list, NULL);
+  item2 = microlist_append(list, NULL);
   assert(item2->prev == item && item2->next == NULL && list->size == 2);
 }
 

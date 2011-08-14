@@ -42,7 +42,7 @@ static void microitem_insert_after(microlist *list, microitem *target, microitem
   ++list->size;
 }
 
-microitem   *microlist_insert_tail(microlist *list, void *data)
+microitem   *microlist_insert_after(microlist *list, microitem *target, void *data)
 {
   microitem *item;
 
@@ -51,6 +51,12 @@ microitem   *microlist_insert_tail(microlist *list, void *data)
   if (!item)
     return (NULL);
   item->data = data;
-  microitem_insert_after(list, list->tail, item);
+  microitem_insert_after(list, target, item);
   return (item);
 }
+
+microitem   *microlist_append(microlist *list, void *data)
+{
+  return (microlist_insert_after(list, list->tail, data));
+}
+
