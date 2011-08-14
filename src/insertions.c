@@ -74,10 +74,9 @@ microitem   *microlist_insert_after(microlist *list, microitem *target, void *da
   microitem *item;
 
   assert(list != NULL);
-  item = malloc(sizeof(*item));
+  item = microitem_create(list, data);
   if (!item)
     return (NULL);
-  item->data = data;
   microitem_insert_after(list, target, item);
   return (item);
 }
@@ -87,10 +86,9 @@ microitem   *microlist_insert_before(microlist *list, microitem *target, void *d
   microitem *item;
 
   assert(list != NULL);
-  item = malloc(sizeof(*item));
+  item = microitem_create(list, data);
   if (!item)
     return (NULL);
-  item->data = data;
   microitem_insert_before(list, target, item);
   return (item);
 }
@@ -104,4 +102,3 @@ microitem   *microlist_prepend(microlist *list, void *data)
 {
   return (microlist_insert_before(list, list->head, data));
 }
-

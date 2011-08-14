@@ -19,19 +19,31 @@
  * \file microlist.h
  */
 
+struct               s_microlist; // Forward declaration
+
 typedef struct       s_microitem
 {
+  struct s_microlist *list;
   struct s_microitem *next;
   struct s_microitem *prev;
   void               *data;
 }                    microitem;
 
-typedef struct
+typedef struct s_microlist
 {
   unsigned int size;
   microitem    *head;
   microitem    *tail;
 }              microlist;
+
+/**
+ * \brief Create a microitem
+ * \param list Pointer to the list where the item will be stored
+ * \param data Data to be stored
+ * \return The microitem or NULL if malloc (3) fails
+ */
+
+microitem   *microitem_create(microlist *list, void *data);
 
 /**
  * \brief Inits a micro list
