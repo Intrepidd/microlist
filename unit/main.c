@@ -35,6 +35,7 @@ void        test_insert(void)
   microitem *item2;
   microitem *item3;
   microitem *item4;
+  unsigned int ret;
 
   puts("Running insert test");
   list = microlist_init();
@@ -46,6 +47,18 @@ void        test_insert(void)
   assert(item3->next == item2 && item3->prev == item && list->size == 3);
   item4 = microlist_prepend(list, NULL);
   assert(list->head == item4 && item4->next == item && item4->prev == NULL && list->size == 4);
+  // item4 -> item -> item3 -> item2 
+  puts("Running delete test");
+  ret = microitem_remove(item4);
+  assert(ret == 3 && list->head == item && list->tail == item2);
+  // item -> item3 -> item2 
+  ret = microitem_remove(item3);
+  assert(ret == 2 && item->next == item2 && item2->prev == item);
+  // item -> item2 
+  ret = microitem_remove(item);
+  assert(ret == 1 && list->head == item2 && list->tail == item2 && item2->prev == NULL && item2->next == NULL);
+  ret = microitem_remove(item2);
+  assert(ret == 0 && list->size == 0 && list->head == NULL && list->tail == NULL);
 }
 
 int         main(void)

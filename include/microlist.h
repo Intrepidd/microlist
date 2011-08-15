@@ -91,4 +91,12 @@ microitem   *microlist_insert_before(microlist *list, microitem *item, void *dat
 
 microitem   *microlist_prepend(microlist *list, void *data);
 
+/**
+ * \brief Removes an item from the list and frees the pointer
+ * \param item the item to be removed, data is NOT freed
+ * \return The new size of the list
+ */
+ 
+ unsigned int microitem_remove(microitem *item);
+
 #endif      /* __MICROLIST__ */
