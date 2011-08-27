@@ -15,6 +15,8 @@
 #include    <stdio.h>
 #include    <stdlib.h>
 #include    <assert.h>
+#include    <time.h>
+#include    <unistd.h>
 
 #include    "microlist.h"
 
@@ -22,7 +24,7 @@ static int  cb_sort(void *it1, void *it2)
 {
   int       a = *((int *)it1);
   int       b = *((int *)it2);
-  return (a > b);
+  return (a < b);
 }
 
 static void test_init(void)
@@ -73,29 +75,46 @@ static void test_insert(void)
 static void test_insert_sort()
 {
   microlist *list;
-  int a,b,c,d;
+  int       *tmp;
+  int       min = 0;
+  int       value;
+  int       i = 0;
+  microitem *current;
 
-  puts("Running sorted insertion test");
-  a = 1;b = 2;c = 3;d = 4;
+  srand(time(NULL));
   list = microlist_init();
-  microlist_insert_sort(list, &d, &cb_sort);
-  microlist_insert_sort(list, &c, &cb_sort);
-  microlist_insert_sort(list, &a, &cb_sort);
-  microlist_insert_sort(list, &b, &cb_sort);
-  assert(list->head->data == &a);
-  assert(list->tail->data == &d);
-  assert(list->head->next->data == &b);
-  assert(list->tail->prev->data == &c);
-  // Need to be done w/ larger amount of data, maybe random
+  for (i = 0; i != 3000; ++i)
+  {
+    tmp = malloc(sizeof(*tmp));
+    assert(tmp != NULL);
+    *tmp = rand();
+    microlist_insert_sort(list, tmp, cb_sort);
+  }
+  current = list->head;
+  while (current)
+  {
+    value = *((int *)current->data);
+    assert(value >= min);
+    min = value;
+    free(current->data);
+    current = current->next;
+  }
   microlist_free(list);
+  write(STDOUT_FILENO, "..", 2);
 }
 
 int         main(void)
 {
+  int       i = 0;
   puts("Running unit tests...");
   test_init();
   test_insert();
-  test_insert_sort();
+  puts("Running 100 sorted insertion test w/ random values");
+  for (i = 0; i != 100; ++i)
+  {
+    test_insert_sort();
+  }
+  puts("");
   puts("All unit tests passed, great!");
   return (EXIT_SUCCESS);
 }

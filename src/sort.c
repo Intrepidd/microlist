@@ -26,10 +26,10 @@ microitem   *microlist_insert_sort(microlist *list, void *data, int (*cb)(void *
   while (current)
   {
     if (cb(data, current->data)) // We can insert
-      return (microlist_insert_after(list, current, data));
+      return (microlist_insert_before(list, current, data));
     current = current->next;
   }
-  // No good element was found, that means our element should be first
-  return (microlist_prepend(list, data));
+  // No good element was found, that means our element should be the last one
+  return (microlist_append(list, data));
 }
 
