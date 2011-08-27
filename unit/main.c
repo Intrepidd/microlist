@@ -33,6 +33,7 @@ static void test_init(void)
   list = microlist_init();
   assert(list != NULL && list->size == 0);
   assert(list->head == NULL && list->tail == NULL);
+  microlist_free(list);
 }
 
 static void test_insert(void)
@@ -66,6 +67,7 @@ static void test_insert(void)
   assert(ret == 1 && list->head == item2 && list->tail == item2 && item2->prev == NULL && item2->next == NULL);
   ret = microitem_remove(item2);
   assert(ret == 0 && list->size == 0 && list->head == NULL && list->tail == NULL);
+  microlist_free(list);
 }
 
 static void test_insert_sort()
@@ -85,6 +87,7 @@ static void test_insert_sort()
   assert(list->head->next->data == &b);
   assert(list->tail->prev->data == &c);
   // Need to be done w/ larger amount of data, maybe random
+  microlist_free(list);
 }
 
 int         main(void)

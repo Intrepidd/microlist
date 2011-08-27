@@ -39,3 +39,17 @@ unsigned int microitem_remove(microitem *item)
   return (size);
 }
 
+void      microlist_free(microlist *list)
+{
+  microitem *current;
+  microitem *next;
+
+  current = list->head;
+  while (current)
+  {
+    next = current->next;
+    microitem_remove(current);
+    current = next;
+  }
+  free(list);
+}

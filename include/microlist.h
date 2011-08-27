@@ -97,7 +97,14 @@ microitem   *microlist_prepend(microlist *list, void *data);
  * \return The new size of the list
  */
 
- unsigned int microitem_remove(microitem *item);
+unsigned int microitem_remove(microitem *item);
+
+/**
+ * \brief Removes all items of a list and free the allocated data
+ * \param list The list to free, all pointers to this list and its items will be unallocated
+ */
+
+void      microlist_free(microlist *list);
 
  /**
   * \brief Inserts an item in a sorted list
