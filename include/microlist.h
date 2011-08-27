@@ -96,7 +96,17 @@ microitem   *microlist_prepend(microlist *list, void *data);
  * \param item the item to be removed, data is NOT freed
  * \return The new size of the list
  */
- 
+
  unsigned int microitem_remove(microitem *item);
+
+ /**
+  * \brief Inserts an item in a sorted list
+  * \param list The already sorted or empty list
+  * \param data The data to insert
+  * \param cb The callback function for comparison between to elements
+  * \return The newly created item, the list is still sorted
+  */
+
+ microitem   *microlist_insert_sort(microlist *list, void *data, int (*cb)(void *, void *));
 
 #endif      /* __MICROLIST__ */
